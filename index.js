@@ -1,49 +1,25 @@
-console.log("Happy diwali to All");
-var APIKey = "4078e32825ab225dede1ce3332e80d62";
-async function fetchWeatherDetails() {
-  try {
-    let city = "goa";
+const userTab = document.querySelector("[data-userWeather]");
+const searchTab = document.querySelector("[data-searchWeather]");
+const userContainer = document.querySelector(".weather-container");
 
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`
-    );
+const grantAccessContainer = document.querySelector(
+  ".grant-location-container"
+);
+const searchForm = document.querySelector("[data-searchForm]");
+const loadingScreen = document.querySelector(".loading-container");
+const userInfoContainer = document.querySelector(".user-info-container");
 
-    const data = await response.json();
-    console.log("Weather Data: -> ", data);
+let currentTab = userTab;
+const API_KEY = "4078e32825ab225dede1ce3332e80d62";
+currentTab.classList.add("current-tab");
 
-    // let newPara = document.createElement("p");
-    // newPara.textContent = `${data?.main?.temp.toFixed(2)} C`;
-    // document.body.appendChild(newPara);
-  } catch (err) {}
-}
+function switchTab(clickedTab) {}
 
-async function getCurrentLocationWeather() {
-  // Check if the browser supports Geolocation
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        // Retrieve latitude and longitude from the position object
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
+userTab.addEventListener("click", () => {
+  //pass clicked tab as input parameter
+  switchTab(userTab);
+});
 
-        const current = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid=${APIKey}`
-        );
-        const currentData = await current.json();
-        console.log("Weather Data: -> ", currentData);
-
-        console.log("Latitude:", latitude);
-        console.log("Longitude:", longitude);
-
-        // Make the API call
-
-        // You can now use the latitude and longitude in your application
-      },
-      (error) => {
-        console.error("Error getting location:", error.message);
-      }
-    );
-  } else {
-    console.error("Geolocation is not supported by this browser.");
-  }
-}
+searchTab.addEventListener("click", () => {
+  switchTab(searchTab);
+});
